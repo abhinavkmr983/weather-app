@@ -12,41 +12,25 @@
 <body>
 
   <div class="container">
-    <h1 class="app-title">🌤️ Weather App</h1>
+    <h1 class="app-title">Weather App</h1>
 
-    <!-- Search Box -->
     <div class="search-box">
-      <input
-        type="text"
-        id="cityInput"
-        placeholder="Enter city name..."
-        autocomplete="off"
-      />
+      <input type="text" id="cityInput" placeholder="Enter city name..." autocomplete="off" />
       <button id="searchBtn">Search</button>
     </div>
 
-    <!-- Error Message -->
     <p class="error-msg" id="errorMsg"></p>
 
-    <!-- Weather Card -->
     <div class="weather-card" id="weatherCard">
-
-      <!-- City Info -->
       <div class="city-info">
         <h2 id="cityName">New Delhi</h2>
         <p id="countryName">India</p>
       </div>
-
-      <!-- Temperature -->
       <div class="temp-box">
         <span id="weatherIcon">☀️</span>
         <h1 id="temperature">32°C</h1>
       </div>
-
-      <!-- Description -->
       <p id="description">Clear Sky</p>
-
-      <!-- Details Grid -->
       <div class="details-grid">
         <div class="detail-item">
           <span class="label">Feels Like</span>
@@ -65,7 +49,6 @@
           <span id="condition">Sunny</span>
         </div>
       </div>
-
     </div>
   </div>
 
