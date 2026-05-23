@@ -1,6 +1,6 @@
 // =============================================
 // STEP 1: Hardcoded weather data for testing
-// Jab API key milega, neeche wala section use karna
+// Jab API key milega, Step 2 wala section use karna
 // =============================================
 
 var weatherData = {
@@ -73,23 +73,33 @@ var weatherData = {
 };
 
 // Page load hone par default city dikhao
-window.onload = function() {
+window.onload = function () {
   showWeather("delhi");
-}
 
-// Search button click hone par
+  // Search button click event
+  document.getElementById("searchBtn").addEventListener("click", function () {
+    searchWeather();
+  });
+
+  // Enter key press karne par bhi search ho
+  document.getElementById("cityInput").addEventListener("keypress", function (e) {
+    if (e.key === "Enter") {
+      searchWeather();
+    }
+  });
+};
+
+// Search karo — hardcoded data mein city dhundho
 function searchWeather() {
-  var input = document.getElementById("cityInput");
-  var city = input.value.trim().toLowerCase();
-  var errorMsg = document.getElementById("errorMsg");
+  var cityInput = document.getElementById("cityInput");
+  var errorMsg  = document.getElementById("errorMsg");
+  var city      = cityInput.value.trim().toLowerCase();
 
-  // Agar input khali hai
   if (city === "") {
     errorMsg.textContent = "Please enter a city name.";
     return;
   }
 
-  // Hardcoded data mein city dhundho
   if (weatherData[city]) {
     errorMsg.textContent = "";
     showWeather(city);
@@ -98,70 +108,19 @@ function searchWeather() {
   }
 }
 
-// Weather card update karna
+// Weather card ke saare elements update karo
 function showWeather(city) {
   var data = weatherData[city];
 
-  document.getElementById("cityName").textContent = data.city;
+  document.getElementById("cityName").textContent    = data.city;
   document.getElementById("countryName").textContent = data.country;
   document.getElementById("temperature").textContent = data.temp;
-  document.getElementById("feelsLike").textContent = data.feelsLike;
-  document.getElementById("humidity").textContent = data.humidity;
-  document.getElementById("windSpeed").textContent = data.windSpeed;
+  document.getElementById("feelsLike").textContent   = data.feelsLike;
+  document.getElementById("humidity").textContent    = data.humidity;
+  document.getElementById("windSpeed").textContent   = data.windSpeed;
   document.getElementById("description").textContent = data.description;
-  document.getElementById("condition").textContent = data.condition;
+  document.getElementById("condition").textContent   = data.condition;
   document.getElementById("weatherIcon").textContent = data.icon;
 }
 
-// Enter key press karne par bhi search ho
-document.getElementById("cityInput").addEventListener("keypress", function(e) {
-  if (e.key === "Enter") {
-    searchWeather();
-  }
-});
 
-
-// =============================================
-// STEP 2: Jab OpenWeatherMap API key mile
-// Upar wala weatherData aur searchWeather() hatao
-// Neeche wala uncomment karo
-// =============================================
-
-/*
-var API_KEY = "apna_api_key_yahan_daalo";
-
-function searchWeather() {
-  var city = document.getElementById("cityInput").value.trim();
-  var errorMsg = document.getElementById("errorMsg");
-
-  if (city === "") {
-    errorMsg.textContent = "Please enter a city name.";
-    return;
-  }
-
-  var url = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&appid=" + API_KEY + "&units=metric";
-
-  fetch(url)
-    .then(function(response) {
-      if (!response.ok) {
-        throw new Error("City not found");
-      }
-      return response.json();
-    })
-    .then(function(data) {
-      errorMsg.textContent = "";
-
-      document.getElementById("cityName").textContent = data.name;
-      document.getElementById("countryName").textContent = data.sys.country;
-      document.getElementById("temperature").textContent = Math.round(data.main.temp) + "°C";
-      document.getElementById("feelsLike").textContent = Math.round(data.main.feels_like) + "°C";
-      document.getElementById("humidity").textContent = data.main.humidity + "%";
-      document.getElementById("windSpeed").textContent = Math.round(data.wind.speed * 3.6) + " km/h";
-      document.getElementById("description").textContent = data.weather[0].description;
-      document.getElementById("condition").textContent = data.weather[0].main;
-    })
-    .catch(function(error) {
-      errorMsg.textContent = "City not found. Please check the name.";
-    });
-}
-*/

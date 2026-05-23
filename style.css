@@ -66,11 +66,15 @@ body {
   font-family: 'Outfit', sans-serif;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s;
+  transition: background 0.3s, transform 0.15s;
 }
 
 .search-box button:hover {
   background: #0096c7;
+}
+
+.search-box button:active {
+  transform: scale(0.97);
 }
 
 /* Error */
@@ -86,10 +90,17 @@ body {
 .weather-card {
   background: rgba(255, 255, 255, 0.12);
   backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
   border-radius: 20px;
   padding: 30px 28px;
   color: #fff;
   border: 1px solid rgba(255, 255, 255, 0.15);
+  animation: fadeIn 0.4s ease;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to   { opacity: 1; transform: translateY(0); }
 }
 
 .city-info h2 {
@@ -140,6 +151,11 @@ body {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  transition: background 0.2s;
+}
+
+.detail-item:hover {
+  background: rgba(255, 255, 255, 0.13);
 }
 
 .detail-item .label {
